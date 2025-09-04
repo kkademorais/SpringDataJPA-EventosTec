@@ -29,5 +29,13 @@ public class EventController {
         return ResponseEntity.ok(eventResponseDTOList);
     }
 
+    @PutMapping
+    public ResponseEntity updateEvent(@RequestBody @Valid EventRequestDTO eventRequestDTO){
+
+        this.eventService.updateEvent(eventRequestDTO);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 }

@@ -67,6 +67,17 @@ public class Event {
     public String getAddress() {return address;}
     public void setAddress(String address) {this.address = address;}
 
+    public void updateEvent(EventRequestDTO eventRequestDTO){
+        this.title = eventRequestDTO.title();
+        this.event_url = eventRequestDTO.event_url();
+        this.date = eventRequestDTO.date();
+        this.address = eventRequestDTO.address();
+        this.remote = eventRequestDTO.remote();
+        this.image_url = eventRequestDTO.image_url();
+        this.description = eventRequestDTO.description();
+    }
+
+
     @Override
     public String toString() {
         return "Event{" +
