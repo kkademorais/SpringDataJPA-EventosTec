@@ -31,9 +31,13 @@ public class EventController {
 
     @PutMapping
     public ResponseEntity updateEvent(@RequestBody @Valid EventRequestDTO eventRequestDTO){
-
         this.eventService.updateEvent(eventRequestDTO);
+        return ResponseEntity.ok().build();
+    }
 
+    @DeleteMapping("/{title}")
+    public ResponseEntity deleteEventByTitle(@PathVariable(name = "title") String title){
+        this.eventService.deleteEventByTitle(title);
         return ResponseEntity.ok().build();
     }
 

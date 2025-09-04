@@ -1,7 +1,7 @@
 package com.eventostec.api.domain.event;
 
-import com.eventostec.api.domain.address.Address;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.*;
 
@@ -12,6 +12,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @UniqueElements
     private String title;
     private String description;
     private String image_url;
@@ -66,17 +67,6 @@ public class Event {
 
     public String getAddress() {return address;}
     public void setAddress(String address) {this.address = address;}
-
-    public void updateEvent(EventRequestDTO eventRequestDTO){
-        this.title = eventRequestDTO.title();
-        this.event_url = eventRequestDTO.event_url();
-        this.date = eventRequestDTO.date();
-        this.address = eventRequestDTO.address();
-        this.remote = eventRequestDTO.remote();
-        this.image_url = eventRequestDTO.image_url();
-        this.description = eventRequestDTO.description();
-    }
-
 
     @Override
     public String toString() {

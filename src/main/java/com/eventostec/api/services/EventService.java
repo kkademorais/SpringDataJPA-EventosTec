@@ -34,16 +34,21 @@ public class EventService {
     }
 
     public void updateEvent(EventRequestDTO eventRequestDTO){
-
-        Event eventUpdate = new Event();
-        eventUpdate.updateEvent(eventRequestDTO);
-
+        Event eventUpdate = new Event(eventRequestDTO);
         eventUpdate.setId(this.eventRepository.findAll()
                 .stream().filter(event -> event.getTitle().equals(eventUpdate.getTitle()))
                 .findFirst().get().getId());
-
         this.eventRepository.save(eventUpdate);
+    }
 
+    public void deleteEventByTitle(String title){
+        Event eventDelete = this.eventRepository.findAll()
+                .stream()
+                .filter(event -> event.getTitle().equals(title))
+                .findFirst()
+                .get();
+
+        this.eventRepository.delete(eventDelete);
     }
 
 
