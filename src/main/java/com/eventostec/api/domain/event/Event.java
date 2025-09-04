@@ -1,5 +1,6 @@
 package com.eventostec.api.domain.event;
 
+import com.eventostec.api.domain.address.Address;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -15,20 +16,32 @@ public class Event {
     private String description;
     private String image_url;
     private String event_url;
-    private Date date;
+    private String date;
     private boolean remote;
+    //OneToOne
+    private String address;
+
 
     public Event(){}
-
-    public Event(UUID id, String title, String description, String image_url, String event_url, Date date, boolean remote){
-        this.id = id;
+    public Event(String title, String description, String image_url, String event_url, String date, boolean remote, String address){
         this.title = title;
         this.description = description;
         this.image_url = image_url;
         this.event_url = event_url;
         this.date = date;
         this.remote = remote;
+        this.address = address;
     }
+    public Event(EventRequestDTO eventRequestDTO){
+        this.title = eventRequestDTO.title();
+        this.description = eventRequestDTO.description();
+        this.image_url = eventRequestDTO.image_url();
+        this.event_url = eventRequestDTO.event_url();
+        this.date = eventRequestDTO.date();
+        this.remote = eventRequestDTO.remote();
+        this.address = eventRequestDTO.address();
+    }
+
 
     public UUID getId() {return id;}
     public void setId(UUID id) {this.id = id;}
@@ -45,11 +58,14 @@ public class Event {
     public String getEvent_url() {return event_url;}
     public void setEvent_url(String event_url) {this.event_url = event_url;}
 
-    public Date getDate() {return date;}
-    public void setDate(Date date) {this.date = date;}
+    public String getDate() {return date;}
+    public void setDate(String date) {this.date = date;}
 
     public boolean isRemote() {return remote;}
     public void setRemote(boolean remote) {this.remote = remote;}
+
+    public String getAddress() {return address;}
+    public void setAddress(String address) {this.address = address;}
 
     @Override
     public String toString() {
