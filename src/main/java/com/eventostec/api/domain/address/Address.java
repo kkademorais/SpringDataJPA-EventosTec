@@ -14,17 +14,22 @@ public class Address {
     private String uf;
     private String city;
 
-    @OneToOne
-    @JoinColumn(name = "event-id")
-    private Event event;
+    //@OneToOne
+    //@JoinColumn(name = "event-id")
+    private String event;
 
     public Address(){}
-    public Address(UUID id, String uf, String city, Event event){
-        this.id = id;
+    public Address(String uf, String city, String event){
         this.uf = uf;
         this.city = city;
         this.event = event;
     }
+    public Address(AddressRequestDTO addressRequestDTO){
+        this.uf = addressRequestDTO.uf();
+        this.city = addressRequestDTO.city();
+        this.event = addressRequestDTO.event();
+    }
+
 
     public UUID getId() {return id;}
     public void setId(UUID id) {this.id = id;}
@@ -35,8 +40,8 @@ public class Address {
     public String getCity() {return city;}
     public void setCity(String city) {this.city = city;}
 
-    public Event getEvent() {return event;}
-    public void setEvent(Event event) {this.event = event;}
+    public String getEvent() {return event;}
+    public void setEvent(String event) {this.event = event;}
 
     @Override
     public String toString() {

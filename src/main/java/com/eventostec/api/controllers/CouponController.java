@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/coupons")
 public class CouponController {
 
-    public final CouponService couponService;
+    private final CouponService couponService;
 
     public CouponController(CouponService couponService){
         this.couponService = couponService;
