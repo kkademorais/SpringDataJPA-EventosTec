@@ -14,21 +14,27 @@ public class Coupon {
 
     private String code;
     private Integer discount;
-    private Date valid;
+    private String validDate;
 
-    @ManyToOne
-    @JoinColumn(name = "event-id")
-    private Event event;
+    //@ManyToOne
+    //@JoinColumn(name = "event-id")
+    //private Event event;
 
 
     public Coupon(){}
-    public Coupon(UUID id, String code, Integer discount, Date valid, Event event){
+    public Coupon(UUID id, String code, Integer discount, String validDate){
         this.id = id;
         this.code = code;
         this.discount = discount;
-        this.valid = valid;
-        this.event = event;
+        this.validDate = validDate;
+        //this.event = event;
     }
+    public Coupon(CouponRequestDTO couponRequestDTO){
+        this.code = couponRequestDTO.code();
+        this.discount = couponRequestDTO.discount();
+        this.validDate = couponRequestDTO.validDate();
+    }
+
 
     public UUID getId() {return id;}
     public void setId(UUID id) {this.id = id;}
@@ -39,11 +45,11 @@ public class Coupon {
     public Integer getDiscount() {return discount;}
     public void setDiscount(Integer discount) {this.discount = discount;}
 
-    public Date getValid() {return valid;}
-    public void setValid(Date valid) {this.valid = valid;}
+    public String getValidDate() {return validDate;}
+    public void setValidDate(String validDate) {this.validDate = validDate;}
 
-    public Event getEvent() {return event;}
-    public void setEvent(Event event) {this.event = event;}
+    //public Event getEvent() {return event;}
+    //public void setEvent(Event event) {this.event = event;}
 
     @Override
     public String toString() {
@@ -51,7 +57,7 @@ public class Coupon {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", discount=" + discount +
-                ", valid=" + valid +
+                ", validDate=" + validDate +
                 '}';
     }
 }
