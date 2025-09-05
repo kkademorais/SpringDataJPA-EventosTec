@@ -1,8 +1,8 @@
 package com.eventostec.api.domain.event;
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Table(name = "events")
@@ -16,14 +16,14 @@ public class Event {
     private String description;
     private String image_url;
     private String event_url;
-    private String date;
+    private Date date;
     private boolean remote;
     //OneToOne
     private String address;
 
 
     public Event(){}
-    public Event(String title, String description, String image_url, String event_url, String date, boolean remote, String address){
+    public Event(String title, String description, String image_url, String event_url, Date date, boolean remote, String address){
         this.title = title;
         this.description = description;
         this.image_url = image_url;
@@ -58,8 +58,11 @@ public class Event {
     public String getEvent_url() {return event_url;}
     public void setEvent_url(String event_url) {this.event_url = event_url;}
 
-    public String getDate() {return date;}
-    public void setDate(String date) {this.date = date;}
+    public Date getDate() {return date;}
+    public void setDate(Date date) {this.date = date;}
+    public String getDateFormatado(){
+        return date.toString().formatted("dd-MM-yyyy HH:mm:ss GMT-03:00");
+    }
 
     public boolean isRemote() {return remote;}
     public void setRemote(boolean remote) {this.remote = remote;}

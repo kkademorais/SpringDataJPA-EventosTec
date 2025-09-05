@@ -9,7 +9,7 @@ public record EventRequestDTO(
         @NotNull
         String title,
         @NotNull
-        String date,
+        Date date,
         //@NotNull -> Se for presencial
         String address,
         Boolean remote,
