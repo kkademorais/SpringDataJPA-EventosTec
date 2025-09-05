@@ -6,6 +6,6 @@ public record CouponResponseDTO(
         String validDate
 ) {
     public CouponResponseDTO(Coupon coupon){
-        this(coupon.getCode(), coupon.getDiscount(), coupon.getValidDate());
+        this(coupon.getCode(), coupon.getDiscount(), coupon.getValidDatetoString());
     }
 }

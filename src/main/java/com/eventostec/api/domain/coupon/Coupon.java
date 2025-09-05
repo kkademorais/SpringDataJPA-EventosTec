@@ -2,6 +2,8 @@ package com.eventostec.api.domain.coupon;
 
 import com.eventostec.api.domain.event.Event;
 import jakarta.persistence.*;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Table(name = "coupons")
@@ -14,7 +16,7 @@ public class Coupon {
 
     private String code;
     private Integer discount;
-    private String validDate;
+    private Date validDate;
 
     //@ManyToOne
     //@JoinColumn(name = "event-id")
@@ -22,7 +24,7 @@ public class Coupon {
 
 
     public Coupon(){}
-    public Coupon(UUID id, String code, Integer discount, String validDate){
+    public Coupon(UUID id, String code, Integer discount, Date validDate){
         this.id = id;
         this.code = code;
         this.discount = discount;
@@ -45,8 +47,13 @@ public class Coupon {
     public Integer getDiscount() {return discount;}
     public void setDiscount(Integer discount) {this.discount = discount;}
 
-    public String getValidDate() {return validDate;}
-    public void setValidDate(String validDate) {this.validDate = validDate;}
+    public Date getValidDate(){return validDate;}
+    public String getValidDatetoString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(validDate);
+    }
+    public void setValidDate(Date validDate) {this.validDate = validDate;}
+
 
     //public Event getEvent() {return event;}
     //public void setEvent(Event event) {this.event = event;}
@@ -57,7 +64,7 @@ public class Coupon {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", discount=" + discount +
-                ", validDate=" + validDate +
+                ", validDate=" + getValidDatetoString() +
                 '}';
     }
 }

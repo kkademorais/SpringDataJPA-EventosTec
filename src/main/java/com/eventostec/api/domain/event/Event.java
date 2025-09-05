@@ -2,6 +2,8 @@ package com.eventostec.api.domain.event;
 
 import jakarta.persistence.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -61,7 +63,8 @@ public class Event {
     public Date getDate() {return date;}
     public void setDate(Date date) {this.date = date;}
     public String getDateFormatado(){
-        return date.toString().formatted("dd-MM-yyyy HH:mm:ss GMT-03:00");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return simpleDateFormat.format(date);
     }
 
     public boolean isRemote() {return remote;}
@@ -78,7 +81,7 @@ public class Event {
                 ", description='" + description + '\'' +
                 ", image_url='" + image_url + '\'' +
                 ", event_url='" + event_url + '\'' +
-                ", date=" + date +
+                ", date=" + getDateFormatado() +
                 ", remote=" + remote +
                 '}';
     }

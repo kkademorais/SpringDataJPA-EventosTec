@@ -5,5 +5,5 @@ import java.util.Date;
 public record CouponRequestDTO(
         String code,
         Integer discount,
-        String validDate
+        Date validDate
 ) {}
