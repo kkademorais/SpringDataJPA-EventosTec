@@ -23,9 +23,10 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
+        // Implementando Pagination
     @GetMapping
-    public ResponseEntity<List<EventResponseDTO>> getEventList(){
-        List<EventResponseDTO> eventResponseDTOList = this.eventService.getEventList();
+    public ResponseEntity<List<EventResponseDTO>> getEventList(@RequestParam(name = "page", defaultValue = "0") int pageNumber,@RequestParam(name = "size", defaultValue = "5") int pageSize){
+        List<EventResponseDTO> eventResponseDTOList = this.eventService.getEventList(pageNumber, pageSize);
         return ResponseEntity.ok(eventResponseDTOList);
     }
 

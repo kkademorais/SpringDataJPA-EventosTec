@@ -4,8 +4,7 @@ import com.eventostec.api.domain.event.Event;
 import com.eventostec.api.domain.event.EventRequestDTO;
 import com.eventostec.api.domain.event.EventResponseDTO;
 import com.eventostec.api.repositories.EventRepository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +24,11 @@ public class EventService {
         eventRepository.save(eventDTO);
     }
 
-    public List<EventResponseDTO> getEventList(){
+        // Implementando pagination
+    public List<EventResponseDTO> getEventList(int pageNumber, int pageSize){
+        Pageable eventPageable = PageRequest.of(pageNumber, pageSize,Sort.by("title"));
         return eventRepository
-                .findAll()
+                .findAll(eventPageable)
                 .stream()
                 .map(event -> new EventResponseDTO(event))
                 .toList();

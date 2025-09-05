@@ -12,7 +12,6 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @UniqueElements
     private String title;
     private String description;
     private String image_url;
