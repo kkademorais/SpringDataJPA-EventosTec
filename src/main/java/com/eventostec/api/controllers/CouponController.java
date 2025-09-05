@@ -22,9 +22,7 @@ public class CouponController {
 
     @PostMapping
     public ResponseEntity addCoupon(@RequestBody @Valid CouponRequestDTO couponRequestDTO){
-        Coupon couponAdd = new Coupon(couponRequestDTO);
-        this.couponService.addCoupon(couponAdd);
-
+        this.couponService.addCoupon(couponRequestDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -32,5 +30,18 @@ public class CouponController {
     public ResponseEntity<List<CouponResponseDTO>> getCoupon(){
         return ResponseEntity.ok(this.couponService.getCoupon());
     }
+
+    @PutMapping
+    public ResponseEntity updateCoupon(@RequestBody @Valid CouponRequestDTO couponRequestDTO){
+        this.couponService.updateCoupon(couponRequestDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{code}")
+    public ResponseEntity deleteCouponByCode(@PathVariable(name = "code") String code){
+        this.couponService.deleteCouponByCode(code);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

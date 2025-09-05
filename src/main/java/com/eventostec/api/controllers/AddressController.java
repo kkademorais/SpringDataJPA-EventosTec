@@ -31,6 +31,16 @@ public class AddressController {
         return ResponseEntity.ok(this.addressService.getAddress());
     }
 
+    @PutMapping
+    public ResponseEntity updateAddress(@RequestBody @Valid AddressRequestDTO addressRequestDTO){
+        this.addressService.updateAddress(addressRequestDTO);
+        return ResponseEntity.ok().build();
+    }
 
+    @DeleteMapping("/{event}")
+    public ResponseEntity deleteAddressByEvent(@PathVariable(name = "event") String event){
+        this.addressService.deleteAddressByEvent(event);
+        return ResponseEntity.ok().build();
+    }
 
 }

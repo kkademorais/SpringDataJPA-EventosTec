@@ -28,6 +28,28 @@ public class AddressService {
                 .toList();
     }
 
+    public void updateAddress(AddressRequestDTO addressRequestDTO){
+        Address addressUpdate = new Address(addressRequestDTO);
+        addressUpdate.setId(
+                this.addressRepository.findAll()
+                        .stream()
+                        .filter(address -> address.getEvent().equals(addressUpdate.getEvent()))
+                        .findFirst()
+                        .get()
+                        .getId()
+        );
+        this.addressRepository.save(addressUpdate);
+    }
+
+    public void deleteAddressByEvent(String event){
+        Address addressDelete = this.addressRepository.findAll()
+                .stream()
+                .filter(address -> address.getEvent().equals(event))
+                .findFirst()
+                .get();
+        this.addressRepository.delete(addressDelete);
+    }
+
 
 
 
